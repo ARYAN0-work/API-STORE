@@ -1,4 +1,6 @@
 import { Router } from "express";
+import authRouter from "../modules/auth.routes"
+
 const router = Router();
 
 router.get("/",(req,res)=>{
@@ -7,14 +9,10 @@ router.get("/",(req,res)=>{
   })
 })
 
-router.get("/test",(req,res)=>{
-  res.status(200).json({
-    success:true,
-    message:"Testing Server"
-  })
-})
+router.use("/auth", authRouter);
 
 router.get("/error",(req,res)=>{
   throw new Error("Testing global error handler")
 })
+
 export default router;

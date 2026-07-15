@@ -6,7 +6,7 @@ const app = express()
 
 app.use(express.json())
 
-app.use('/',rootRouter);
+app.use('/api/v1',rootRouter);
 
 app.use((req,res)=>{
     res.status(404).json({
