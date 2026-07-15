@@ -4,9 +4,7 @@ import authRouter from "../modules/auth.routes"
 const router = Router();
 
 router.get("/",(req,res)=>{
-  res.json({
-    message:"Server's running "
-  })
+  res.json({message:"Server's running "})
 })
 
 router.use("/auth", authRouter);
