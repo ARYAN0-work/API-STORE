@@ -5,6 +5,15 @@ export const registerService =async (data:{
     email:string;
     password:string;
 })=>{
+   
+    const duplicateUser= await User.findOne({
+        email:data.email
+    });
+
+    if (duplicateUser) {
+        throw new Error("User already exists")
+    }
+
     const user = await User.create(data);
 
     return {

@@ -5,6 +5,6 @@ export const errorHandler: ErrorRequestHandler=(err,req,res,next)=>{
     
     res.status(500).json({
         success:false,
-        message:"Internal Server Error"
+        message:err instanceof Error ? err.message:"Internal Server Error"
     })
 }
