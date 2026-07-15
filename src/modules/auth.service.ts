@@ -1,3 +1,4 @@
+import { AppError } from "../utils/appError";
 import { User } from "../models/user-model"
 
 export const registerService =async (data:{
@@ -11,7 +12,7 @@ export const registerService =async (data:{
     });
 
     if (duplicateUser) {
-        throw new Error("User already exists")
+     throw new AppError("User already exists", 409);
     }
 
     const user = await User.create(data);
