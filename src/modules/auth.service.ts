@@ -1,3 +1,4 @@
+import bcrypt from "bcrypt";
 import { AppError } from "../utils/appError";
 import { User } from "../models/user-model"
 
@@ -15,7 +16,9 @@ export const registerService =async (data:{
      throw new AppError("User already exists", 409);
     }
 
-    const user = await User.create(data);
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    const user = await User.create({...data,password: hashedPassword,});
 
     return {
         success: true,
