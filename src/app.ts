@@ -1,4 +1,5 @@
 import express from "express";
+import { errorHandler } from "./middlewares/error.middleware";
 import rootRouter from "./routes/root.routes"
 
 const app = express()
@@ -13,5 +14,7 @@ app.use((req,res)=>{
         message:"Route not found"
     })
 })
+
+app.use(errorHandler)
 
 export default app;

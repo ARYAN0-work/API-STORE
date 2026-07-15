@@ -14,4 +14,7 @@ router.get("/test",(req,res)=>{
   })
 })
 
+router.get("/error",(req,res)=>{
+  throw new Error("Testing global error handler")
+})
 export default router;
