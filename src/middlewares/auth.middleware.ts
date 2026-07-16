@@ -22,5 +22,13 @@ export const authenticate = async(
 
  const user = await User.findById(decoded.userId);
 
- 
+ if (!user) {
+  return res.status(401).json({
+    success: false,
+    message: "User not found",
+  });
+}
+
+  (req as any).user = user;
+  next()
 }
