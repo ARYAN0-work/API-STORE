@@ -16,13 +16,35 @@ export const registerService =async (data:{
      throw new AppError("User already exists", 409);
     }
 
-    const hashedPassword = await bcrypt.hash(data.password, 10);
-
-    const user = await User.create({...data,password: hashedPassword,});
+    const user = await User.create(data);
 
     return {
         success: true,
         message: "User registration successfully",
         user,
     }
+}
+
+export const loginService = async (data: {
+    email: string;
+    password: string;
+}) => {
+      
+    const user = await User.findOne({
+        email:data.email,
+    }).select("+password")
+
+    if (!user) {
+        throw new AppError("Invalid email or password",401)
+    }
+  
+    const isPasswordValid = await bcrypt.compare(data.password,user.password)
+
+    if (!isPasswordValid) {throw new AppError("Invalid email or password", 401)}
+
+    user.password = undefined as any;
+
+    return {success: true,message: "Login successful",user,};
+
+
 }
