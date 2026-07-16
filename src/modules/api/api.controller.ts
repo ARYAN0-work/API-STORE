@@ -75,3 +75,25 @@ export const updateApi = async (
     data: api,
   });
 };
+
+export const deleteApi = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  const api = await apiService.deleteApi(
+    req.params.id,
+    (req as any).user._id
+  );
+
+  if (!api) {
+    return res.status(404).json({
+      success: false,
+      message: "API not found",
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    message: "API deleted successfully",
+  });
+};

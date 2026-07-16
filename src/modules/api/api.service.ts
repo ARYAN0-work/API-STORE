@@ -38,4 +38,15 @@ export const apiService ={
 
     return api;
   },
+   deleteApi: async (
+     apiId: string,
+     ownerId: string
+   ) => {
+     const api = await Api.findOneAndDelete({
+       _id: apiId,
+       owner: ownerId,
+     });
+   
+     return api;
+   },
 };
