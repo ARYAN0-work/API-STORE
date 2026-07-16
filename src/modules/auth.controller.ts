@@ -15,3 +15,12 @@ export const login = async (
     res.status(200).json(result);
 }
 
+export const us = async (
+  req: Request,
+  res: Response
+) => {
+  res.status(200).json({
+    success: true,
+    user: (req as any).user,
+  });
+};
