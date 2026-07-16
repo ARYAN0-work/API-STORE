@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import { AppError } from "../utils/appError";
 import { User } from "../models/user-model"
+import { genrateToken } from "../utils/jwt";
 
 export const registerService =async (data:{
     name:string;
@@ -18,11 +19,17 @@ export const registerService =async (data:{
 
     const user = await User.create(data);
 
-    return {
-        success: true,
-        message: "User registration successfully",
-        user,
-    }
+    const token = genrateToken(user.id);
+
+     const userObject = user.toObject() as any;
+     delete userObject.password;
+     
+     return {
+         success: true,
+         message: "Login successful",
+         token,
+         user: userObject,
+     };
 }
 
 export const loginService = async (data: {
