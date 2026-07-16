@@ -27,6 +27,16 @@ const apiSchema = new Schema(
             type: Boolean,
             default: true,
     },
+        apiKey: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    
+    usageCount: {
+      type: Number,
+      default: 0,
+    },
     },
     {
         timestamps:true,
