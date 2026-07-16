@@ -13,4 +13,13 @@ export const apiService ={
     
       return api;
     },
+
+    getSingleApi: async (apiId: string, ownerId: string) => {
+      const api = await Api.findOne({
+        _id: apiId,
+        owner: ownerId,
+      });
+    
+      return api;
+    },
 };
