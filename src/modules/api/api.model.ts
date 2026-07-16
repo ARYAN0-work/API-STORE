@@ -18,8 +18,19 @@ const apiSchema = new Schema(
           required: true,
           trim: true,
         },
+        owner:{
+            type:Schema.Types.ObjectId,
+            ref:"User",
+            required:true,
+    },
+        isActive: {
+            type: Boolean,
+            default: true,
+    },
     },
     {
         timestamps:true,
-    }
+    },
 )
+
+export const Api = model("Api", apiSchema);
