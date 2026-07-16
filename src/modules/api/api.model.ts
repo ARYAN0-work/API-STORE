@@ -3,7 +3,7 @@ import { Schema, model } from "mongoose";
 const apiSchema = new Schema(
     {
         name:{
-            tyep:String,
+            type:String,
             required:true,
             trim:true,
         },
