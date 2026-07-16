@@ -22,4 +22,20 @@ export const apiService ={
     
       return api;
     },
+
+    updateApi: async (apiId: string,ownerId: string,data: any) => {
+    const api = await Api.findOneAndUpdate(
+      {
+        _id: apiId,
+        owner: ownerId,
+      },
+      data,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    return api;
+  },
 };

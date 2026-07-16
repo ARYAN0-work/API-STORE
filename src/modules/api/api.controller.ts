@@ -52,3 +52,26 @@ export const getSingleApi = async (
     data: api,
   });
 };
+
+export const updateApi = async (
+  req: Request<{ id: string }>,
+  res: Response
+) => {
+  const api = await apiService.updateApi(
+    req.params.id,
+    (req as any).user._id,
+    req.body
+  );
+
+  if (!api) {
+    return res.status(404).json({
+      success: false,
+      message: "API not found",
+    });
+  }
+
+  return res.status(200).json({
+    success: true,
+    data: api,
+  });
+};
