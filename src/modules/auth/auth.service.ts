@@ -1,6 +1,6 @@
 import bcrypt from "bcrypt";
 import { AppError } from "../../utils/appError";
-import { User } from "../../models/user-model"
+import { User } from "../../models/user.model"
 import { genrateToken } from "../../utils/jwt";
 
 export const registerService =async (data:{
