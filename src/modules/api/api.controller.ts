@@ -5,7 +5,7 @@ export const createApi = async (
   req: Request,
   res: Response
 ) => {
-   const api = await apiService.createApi(req.body);
+   const api = await apiService.createApi(req.body,(req as any).user._id);
 
    return res.status(201).json({
     success: true,
