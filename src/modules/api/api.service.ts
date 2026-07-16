@@ -7,4 +7,10 @@ export const apiService ={
 
       return api;
     },
+
+    getApi: async (ownerId: string) => {
+      const api = await Api.find({ owner: ownerId });
+    
+      return api;
+    },
 };
