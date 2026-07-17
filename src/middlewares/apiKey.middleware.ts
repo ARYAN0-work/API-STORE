@@ -34,6 +34,21 @@ export const apiKeyMiddleware = async (
   });
 }
 
+   const oneHour = 60 * 60 * 1000;
+   
+   if (Date.now() - storedKey.windowStart.getTime() > oneHour) {
+     storedKey.windowStart = new Date();
+     storedKey.requestCount = 0;
+   }
+   
+   if (storedKey.requestCount >= storedKey.rateLimit) {
+     return res.status(429).json({
+       success: false,
+       message: "Rate limit exceeded",
+     });
+   }
+   
+
    storedKey.requestCount += 1;
    storedKey.lastUsedAt = new Date();
    

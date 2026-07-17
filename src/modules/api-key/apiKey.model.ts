@@ -33,6 +33,16 @@ const apiKeySchema = new Schema(
       type: Date,
       default: null,
     },
+
+    rateLimit: {
+      type: Number,
+      default: 100,
+    },
+    
+    windowStart: {
+      type: Date,
+      default: Date.now,
+    },
   },
   {
     timestamps: true,
