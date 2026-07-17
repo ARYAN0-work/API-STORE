@@ -24,6 +24,11 @@ const apiKeySchema = new Schema(
       default: true,
     },
 
+    requestCount: {
+      type: Number,
+      default: 0,
+    },
+
     lastUsedAt: {
       type: Date,
       default: null,

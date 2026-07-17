@@ -34,6 +34,11 @@ export const apiKeyMiddleware = async (
   });
 }
 
+   storedKey.requestCount += 1;
+   storedKey.lastUsedAt = new Date();
+   
+   await storedKey.save();
+
   (req as any).apiKey = storedKey;
 
   next();
