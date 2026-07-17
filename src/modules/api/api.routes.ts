@@ -9,12 +9,6 @@ router.post("/", authenticate, createApi);
 
 router.get("/", authenticate, getApi);
 
-router.get("/:id", authenticate, getSingleApi);
-
-router.patch("/:id", authenticate, updateApi);
-
-router.delete("/:id", authenticate, deleteApi);
-
 router.get(
   "/protected",
   authenticate,
@@ -26,5 +20,12 @@ router.get(
     });
   }
 );
+
+router.get("/:id", authenticate, getSingleApi);
+
+router.patch("/:id", authenticate, updateApi);
+
+router.delete("/:id", authenticate, deleteApi);
+
 
 export default router;
