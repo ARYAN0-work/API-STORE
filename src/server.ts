@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/db';
 
 dotenv.config();
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 5000;
 
 const startServer = async () => {
   try {
@@ -11,7 +11,7 @@ const startServer = async () => {
     await connectDB();
     console.log('DB connected successfully!');
     app.listen(PORT, () => {
-      console.log(`Server is listening on port ${PORT}`);
+      console.log(`Server is Started`);
     });
   } catch (error) {
     console.error('failed to start server due to database connection ', error);
