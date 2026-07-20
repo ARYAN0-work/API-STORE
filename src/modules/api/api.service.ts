@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+import {AppError} from "../../utils/appError";
 import { Api } from "./api.model";
 
 export const apiService ={
@@ -15,6 +17,9 @@ export const apiService ={
     },
 
     getSingleApi: async (apiId: string, ownerId: string) => {
+      if (!mongoose.Types.ObjectId.isValid(apiId)) {
+        throw new AppError("Invalid API ID",400)
+      }
       const api = await Api.findOne({
         _id: apiId,
         owner: ownerId,

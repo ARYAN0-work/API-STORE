@@ -8,6 +8,12 @@ export const registerService =async (data:{
     email:string;
     password:string;
 })=>{
+
+    const { name, email, password } = data;
+
+    if (!name || !email || !password) {
+        throw new AppError("All fields are required", 400);
+    }
    
     const duplicateUser= await User.findOne({
         email:data.email
