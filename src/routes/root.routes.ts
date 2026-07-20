@@ -13,8 +13,4 @@ router.use('/auth', authRouter);
 router.use('/api', apiRouter);
 router.use('/api-keys', apiKeyRoutes);
 
-router.get('/error', (_req, _res) => {
-  throw new Error('Testing global error handler');
-});
-
 export default router;
