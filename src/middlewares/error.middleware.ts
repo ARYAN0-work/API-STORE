@@ -1,7 +1,7 @@
 import { AppError } from "../utils/appError";
 import { ErrorRequestHandler } from "express";
 
-export const errorHandler: ErrorRequestHandler=(err,req,res,next)=>{
+export const errorHandler: ErrorRequestHandler=(err,req,res,_next)=>{
     console.log(err);
     
     const statusCode =err instanceof AppError? err.statusCode: 500;

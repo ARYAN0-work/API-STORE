@@ -5,7 +5,7 @@ import apiKeyRoutes from "../modules/api-key/apiKey.routes";
 
 const router = Router();
 
-router.get("/",(req,res)=>{
+router.get("/",(_req,res)=>{
   res.json({message:"Server's running "})
 })
 
@@ -13,7 +13,7 @@ router.use("/auth", authRouter);
 router.use("/api", apiRouter);
 router.use("/api-keys", apiKeyRoutes);
 
-router.get("/error",(req,res)=>{
+router.get("/error",(_req,_res)=>{
   throw new Error("Testing global error handler")
 })
 
