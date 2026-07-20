@@ -1,63 +1,54 @@
-import bcrypt from "bcrypt";
-import { AppError } from "../../utils/appError";
-import { User } from "../../models/user.model"
-import { genrateToken } from "../../utils/jwt";
+import bcrypt from 'bcrypt';
+import { AppError } from '../../utils/appError';
+import { User } from '../../models/user.model';
+import { genrateToken } from '../../utils/jwt';
 
-export const registerService =async (data:{
-    name:string;
-    email:string;
-    password:string;
-})=>{
+export const registerService = async (data: { name: string; email: string; password: string }) => {
+  const { name, email, password } = data;
 
-    const { name, email, password } = data;
+  if (!name || !email || !password) {
+    throw new AppError('All fields are required', 400);
+  }
 
-    if (!name || !email || !password) {
-        throw new AppError("All fields are required", 400);
-    }
-   
-    const duplicateUser= await User.findOne({
-        email:data.email
-    });
+  const duplicateUser = await User.findOne({
+    email: data.email,
+  });
 
-    if (duplicateUser) {
-     throw new AppError("User already exists", 409);
-    }
+  if (duplicateUser) {
+    throw new AppError('User already exists', 409);
+  }
 
-    const user = await User.create(data);
+  const user = await User.create(data);
 
-    const token = genrateToken(user.id);
+  const token = genrateToken(user.id);
 
-     const userObject = user.toObject() as any;
-     delete userObject.password;
-     
-     return {
-         success: true,
-         message: "Login successful",
-         token,
-         user: userObject,
-     };
-}
+  const userObject = user.toObject() as any;
+  delete userObject.password;
 
-export const loginService = async (data: {
-    email: string;
-    password: string;
-}) => {
-      
-    const user = await User.findOne({
-        email:data.email,
-    }).select("+password")
+  return {
+    success: true,
+    message: 'Login successful',
+    token,
+    user: userObject,
+  };
+};
 
-    if (!user) {
-        throw new AppError("Invalid email or password",401)
-    }
-  
-    const isPasswordValid = await bcrypt.compare(data.password,user.password)
+export const loginService = async (data: { email: string; password: string }) => {
+  const user = await User.findOne({
+    email: data.email,
+  }).select('+password');
 
-    if (!isPasswordValid) {throw new AppError("Invalid email or password", 401)}
+  if (!user) {
+    throw new AppError('Invalid email or password', 401);
+  }
 
-    user.password = undefined as any;
+  const isPasswordValid = await bcrypt.compare(data.password, user.password);
 
-    return {success: true,message: "Login successful",user,};
+  if (!isPasswordValid) {
+    throw new AppError('Invalid email or password', 401);
+  }
 
+  user.password = undefined as any;
 
-}
+  return { success: true, message: 'Login successful', user };
+};

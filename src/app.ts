@@ -1,20 +1,20 @@
-import express from "express";
-import { errorHandler } from "./middlewares/error.middleware";
-import rootRouter from "./routes/root.routes"
+import express from 'express';
+import { errorHandler } from './middlewares/error.middleware';
+import rootRouter from './routes/root.routes';
 
-const app = express()
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
 
-app.use('/api/v1',rootRouter);
+app.use('/api/v1', rootRouter);
 
-app.use((req,res)=>{
-    res.status(404).json({
-        success:false,
-        message:"Route not found"
-    })
-})
+app.use((req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'Route not found',
+  });
+});
 
-app.use(errorHandler)
+app.use(errorHandler);
 
 export default app;

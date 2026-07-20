@@ -1,20 +1,20 @@
-import { Router } from "express";
-import authRouter from "../modules/auth/auth.routes"
-import apiRouter from "../modules/api/api.routes";
-import apiKeyRoutes from "../modules/api-key/apiKey.routes";
+import { Router } from 'express';
+import authRouter from '../modules/auth/auth.routes';
+import apiRouter from '../modules/api/api.routes';
+import apiKeyRoutes from '../modules/api-key/apiKey.routes';
 
 const router = Router();
 
-router.get("/",(_req,res)=>{
-  res.json({message:"Server's running "})
-})
+router.get('/', (_req, res) => {
+  res.json({ message: "Server's running " });
+});
 
-router.use("/auth", authRouter);
-router.use("/api", apiRouter);
-router.use("/api-keys", apiKeyRoutes);
+router.use('/auth', authRouter);
+router.use('/api', apiRouter);
+router.use('/api-keys', apiKeyRoutes);
 
-router.get("/error",(_req,_res)=>{
-  throw new Error("Testing global error handler")
-})
+router.get('/error', (_req, _res) => {
+  throw new Error('Testing global error handler');
+});
 
 export default router;

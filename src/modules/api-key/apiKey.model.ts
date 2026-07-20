@@ -1,10 +1,10 @@
-import { Schema, model } from "mongoose";
+import { Schema, model } from 'mongoose';
 
 const apiKeySchema = new Schema(
   {
     user: {
       type: Schema.Types.ObjectId,
-      ref: "User",
+      ref: 'User',
       required: true,
     },
 
@@ -38,7 +38,7 @@ const apiKeySchema = new Schema(
       type: Number,
       default: 100,
     },
-    
+
     windowStart: {
       type: Date,
       default: Date.now,
@@ -49,4 +49,4 @@ const apiKeySchema = new Schema(
   }
 );
 
-export const ApiKey = model("ApiKey", apiKeySchema);
+export const ApiKey = model('ApiKey', apiKeySchema);
